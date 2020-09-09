@@ -45,7 +45,8 @@ datacache.get = function(key, encoding="utf8") {
     if(fs.existsSync(keypath)) {
         return fs.readFileSync(keypath, {encoding})
     } else if(fs.existsSync(keypath+".json")) {
-        return fs.readFileSync(keypath+".json", {encoding});
+        const filedata = fs.readFileSync(keypath+".json", {encoding});
+        return JSON.parse(filedata);
     }
 
     return undefined;
