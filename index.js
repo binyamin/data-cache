@@ -40,10 +40,12 @@ datacache.set = function(key, value, ext="") {
  */
 
 datacache.get = function(key, encoding="utf8") {
-    let keypath = path.resolve(_cachedir, key.replace(/\./g, path.sep));
+    const keypath = path.resolve(_cachedir, key.replace(/\./g, path.sep));
 
-    if(fs.existsSync(keypath)){
+    if(fs.existsSync(keypath)) {
         return fs.readFileSync(keypath, {encoding})
+    } else if(fs.existsSync(keypath+".json")) {
+        return fs.readFileSync(keypath+".json", {encoding});
     }
 
     return undefined;
