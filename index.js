@@ -36,7 +36,7 @@ datacache.set = function(key, value, ext="") {
  * Retrieve a value
  * @param {String} key - Uses dot-notation (no brackets)
  * @param {BufferEncoding} [encoding="utf-8"] - (Optional)
- * @returns {String|undefined}
+ * @returns {String|JSON}
  */
 
 datacache.get = function(key, encoding="utf8") {
