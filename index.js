@@ -12,15 +12,18 @@ function _initCache() {
 }
 
 /**
- *
- * @param {String} key
+ * Set a value
+ * @param {String} key - Uses dot-notation (no brackets)
+ * @param {String|JSON} value - data to store
  */
 
 datacache.set = function(key, value, ext="") {
     _initCache();
+
     if(!value) throw new Error("param `value` is not present");
 
     let keypath = path.resolve(_cachedir, key.replace(/\./g, path.sep));
+
     if(typeof value === "object") {
         value = JSON.stringify(value, null, 4)
         ext = ".json";
@@ -30,9 +33,10 @@ datacache.set = function(key, value, ext="") {
 }
 
 /**
- *
- * @param {String} key
- * @param {BufferEncoding} [encoding="utf-8"]
+ * Retrieve a value
+ * @param {String} key - Uses dot-notation (no brackets)
+ * @param {BufferEncoding} [encoding="utf-8"] - (Optional)
+ * @returns {String|undefined}
  */
 
 datacache.get = function(key, encoding="utf8") {

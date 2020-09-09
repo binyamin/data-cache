@@ -1,9 +1,11 @@
 {
   "name": "node-data-cache",
   "version": "1.0.0",
-  "description": "Cache project data locally",
+  "description": "Tiny module for caching data",
   "main": "index.js",
-  "dependencies": {},
+  "engines": {
+      "node": ">=8"
+  },
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^8.1.3",
@@ -16,7 +18,11 @@
     "type": "git",
     "url": "git+https://github.com/binyamin/node-data-cache.git"
   },
-  "keywords": [],
+  "keywords": [
+      "cache",
+      "caching",
+      "memory"
+  ],
   "author": "Binyamin Aron Green (https://binyam.in/)",
   "license": "MIT",
   "bugs": {
