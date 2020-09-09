@@ -8,7 +8,7 @@
     "node": ">=10"
   },
   "files": [
-      "index.js"
+    "index.js"
   ],
   "devDependencies": {
     "chai": "^4.2.0",

@@ -1,6 +1,7 @@
-# node-data-cache
+# Data-Cache
 [![Build Status](https://travis-ci.com/binyamin/data-cache.svg?branch=main)](https://travis-ci.com/binyamin/data-cache)
-Tiny module for caching data
+
+> A tiny npm module for caching data
 
 ## Install
 ```
