@@ -4,12 +4,12 @@ Tiny module for caching data
 
 ## Install
 ```
-$ npm install @b3u/data-cache
+$ npm install @binyamin/data-cache
 ```
 
 ## Usage
 ```js
-const datacache = require("@b3u/data-cache");
+const datacache = require("@binyamin/data-cache");
 
 datacache.set("data", "value");
 // => Creates a file `.cache/data`, with a value of "value"
