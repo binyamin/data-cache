@@ -1,11 +1,11 @@
 {
   "name": "@binyamin/data-cache",
   "private": false,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Tiny module for caching data",
   "main": "index.js",
   "engines": {
-    "node": ">=8"
+    "node": ">=10"
   },
   "files": [
       "index.js"
