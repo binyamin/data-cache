@@ -1,9 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const datacache = {};
 const _cachedir = path.join(process.cwd(), ".cache");
-
 
 function _initCache() {
     if(fs.existsSync(_cachedir) === false) {
@@ -13,11 +11,11 @@ function _initCache() {
 
 /**
  * Set a value
- * @param {String} key - Uses dot-notation (no brackets)
- * @param {String|JSON} value - data to store
+ * @param {string} key - Uses dot-notation (no brackets)
+ * @param {*} value - data to store
  */
 
-datacache.set = function(key, value, ext="") {
+function set(key, value, ext="") {
     _initCache();
 
     if(!value) throw new Error("param `value` is not present");
@@ -34,12 +32,11 @@ datacache.set = function(key, value, ext="") {
 
 /**
  * Retrieve a value
- * @param {String} key - Uses dot-notation (no brackets)
+ * @param {string} key - Uses dot-notation (no brackets)
  * @param {BufferEncoding} [encoding="utf-8"] - (Optional)
- * @returns {String|JSON}
+ * @returns {*}
  */
-
-datacache.get = function(key, encoding="utf8") {
+function get(key, encoding="utf8") {
     const keypath = path.resolve(_cachedir, key.replace(/\./g, path.sep));
 
     if(fs.existsSync(keypath)) {
@@ -52,4 +49,7 @@ datacache.get = function(key, encoding="utf8") {
     return undefined;
 }
 
-module.exports = datacache
+module.exports = {
+    get,
+    set
+}
