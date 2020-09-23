@@ -29,7 +29,7 @@ describe("DataCache Module", () => {
             done();
         })
 
-        it("should get a value, if key exists", (done) => {
+        it("should return a value, if key exists", (done) => {
             datacache.set("username", "binyamin");
 
             const username = datacache.get("username");
@@ -46,7 +46,17 @@ describe("DataCache Module", () => {
             expect(email).not.to.exist;
             done();
         })
-        it("should return data, if data is json and ext was not specified", (done) => {
+        it("should return an object of key-value pairs, if key points to a folder", (done) => {
+            datacache.set("people.binyamin", {username: "binyamin"})
+
+            const people = datacache.get("people");
+            expect(people).to.exist;
+            expect(people).to.be.an("object");
+            expect(people).to.haveOwnProperty("binyamin")
+            expect(people.binyamin).to.deep.equal({username: "binyamin"})
+            done();
+        })
+        it("should return a value, if data is json and `ext` was not specified", (done) => {
             const input = [
                 {
                     display_name: "Binyamin Green",

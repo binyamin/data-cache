@@ -9,6 +9,15 @@ function _initCache() {
     }
 }
 
+/** @returns {*} */
+function _readFile(abspath, encoding) {
+    let filedata = fs.readFileSync(abspath, {encoding});
+    if(abspath.endsWith(".json")) {
+        filedata = JSON.parse(filedata)
+    }
+    return filedata;
+}
+
 /**
  * Set a value
  * @param {string} key - Uses dot-notation (no brackets)
@@ -39,14 +48,29 @@ function set(key, value, ext="") {
 function get(key, encoding="utf8") {
     const keypath = path.resolve(_cachedir, key.replace(/\./g, path.sep));
 
+    let data;
+
     if(fs.existsSync(keypath)) {
-        return fs.readFileSync(keypath, {encoding})
-    } else if(fs.existsSync(keypath+".json")) {
-        const filedata = fs.readFileSync(keypath+".json", {encoding});
-        return JSON.parse(filedata);
+        if(fs.lstatSync(keypath).isDirectory()) {
+            data = {};
+
+            const dir = fs.readdirSync(keypath);
+            for(const filepath of dir) {
+                const filename = path.parse(filepath).name;
+                data[filename] = _readFile(path.resolve(keypath, filepath), encoding);
+            }
+        } else {
+            data = _readFile(keypath, encoding);
+        }
+    } else {
+        if(fs.existsSync(keypath+".json")) {
+            data = _readFile(keypath+".json", encoding);
+        } else {
+            data = undefined;
+        }
     }
 
-    return undefined;
+    return data;
 }
 
 module.exports = {
