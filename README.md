@@ -7,7 +7,7 @@
 
 ## Install
 
-```
+```console
 $ npm install @binyamin/data-cache
 ```
 
