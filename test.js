@@ -1,79 +1,51 @@
+import test from 'ava';
+
 import mock from 'mock-fs'; // Import before 'node:fs'
 import fs from 'node:fs/promises';
-import { expect } from 'chai';
 
 import * as datacache from './index.js';
 
-describe('DataCache Module', () => {
-	describe('.set() - Add a value to the cache', () => {
-		beforeEach(async () => {
-			mock();
-		});
+test.before(() => {
+	mock();
+});
 
-		it('should add a value to the cache, if data key is empty', async () => {
-			datacache.set('username', 'binyamin');
+test.after(() => {
+	mock.restore();
+});
 
-			const content = await fs.readFile('.cache/username', 'utf-8');
-			expect(content).to.equal('binyamin');
-		});
+test.serial('#set should set key if value is provided', async (t) => {
+	datacache.set('username', 'binyamin');
 
-		it('should throw an error, if value param is not present', () => {
-			expect(() => datacache.set('username')).to.throw();
-		});
+	const content = await fs.readFile('.cache/username', 'utf-8');
+	t.is(content, 'binyamin');
+});
 
-		afterEach(mock.restore);
+test('#set should throw if value is not present', (t) => {
+	t.throws(() => datacache.set('username'));
+});
+
+test('#get should return a value, if key exists', (t) => {
+	const username = datacache.get('username');
+	t.is(username, 'binyamin');
+});
+
+test('#get should return `undefined`, if key does not exist', (t) => {
+	const email = datacache.get('email');
+	t.is(email, undefined);
+});
+
+test('#get should return an object/record, if key points to folder', (t) => {
+	datacache.set('person.username', 'binyamin');
+	const person = datacache.get('person');
+	t.deepEqual(person, {
+		username: 'binyamin',
 	});
+});
 
-	describe('.get() - Retrieve a value from the cache', () => {
-		beforeEach(() => {
-			mock()
-		});
-
-		it('should return a value, if key exists', async () => {
-			datacache.set('username', 'binyamin');
-
-			const username = datacache.get('username');
-
-			expect(username).to.exist;
-			expect(username).to.equal('binyamin');
-			const content = await fs.readFile('.cache/username', 'utf-8');
-			expect(content).to.equal(username);
-		});
-
-		it('should return undefined, if key does not exist', () => {
-			datacache.set('username', 'binyamin');
-
-			const email = datacache.get('email');
-			expect(email).not.to.exist;
-		});
-
-		it('should return an object of key-value pairs, if key points to a folder', () => {
-			datacache.set('people.binyamin', { username: 'binyamin' })
-
-			const people = datacache.get('people');
-			expect(people).to.exist;
-			expect(people).to.be.an('object');
-			expect(people).to.haveOwnProperty('binyamin')
-			expect(people.binyamin).to.deep.equal({ username: 'binyamin' })
-		});
-
-		it('should return a value, if data is json and `ext` was not specified', () => {
-			const input = [
-				{
-					display_name: 'Binyamin Green',
-					github: 'binyamin'
-				},
-			];
-
-			datacache.set('people', input);
-
-			const output = datacache.get('people');
-			expect(output).to.exist;
-			expect(output).to.be.an('array');
-			expect(output[0]).to.be.an('object')
-			expect(output).to.deep.equal(input);
-		});
-
-		afterEach(mock.restore);
+test('#get should return a value, if data is JSON and `ext` was not present', (t) => {
+	datacache.set('person2', { username: 'binyamin' });
+	const person = datacache.get('person2');
+	t.deepEqual(person, {
+		username: 'binyamin',
 	});
 });

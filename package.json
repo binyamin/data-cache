@@ -14,13 +14,12 @@
 	],
 	"devDependencies": {
 		"@types/node": "^18.15.11",
-		"chai": "^4.3.7",
-		"mocha": "^10.2.0",
+		"ava": "^5.2.0",
 		"mock-fs": "^5.2.0",
 		"typescript": "^5.0.2"
 	},
 	"scripts": {
-		"test": "mocha",
+		"test": "ava",
 		"types": "tsc index.js --allowJS --declaration --emitDeclarationOnly"
 	},
 	"repository": {
