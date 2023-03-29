@@ -5,7 +5,7 @@
 	"description": "Tiny module for caching data",
 	"main": "index.js",
 	"engines": {
-		"node": ">=v12"
+		"node": ">=v14"
 	},
 	"files": [
 		"index.js",
