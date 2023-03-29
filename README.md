@@ -14,12 +14,12 @@ $ npm install @binyamin/data-cache
 ## Usage
 
 ```js
-const datacache = require("@binyamin/data-cache");
+import * as datacache from '@binyamin/data-cache';
 
-datacache.set("data", "value");
-// => Creates a file `.cache/data`, with a value of "value"
+datacache.set('data', 'value');
+// => Creates a file `.cache/data`, with a value of 'value'
 
-datacache.get("data");
+datacache.get('data');
 // => "value"
 ```
 
