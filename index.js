@@ -16,7 +16,7 @@ function _readFile(abspath, encoding) {
 /**
  * Set a value
  * @param {string} key - Uses dot-notation (no brackets)
- * @param {*} value - data to store
+ * @param {any} value - data to store
  */
 export function set(key, value, ext = '') {
 	if (!value) throw new Error('param `value` is not present');
@@ -35,7 +35,7 @@ export function set(key, value, ext = '') {
  * Retrieve a value
  * @param {string} key - Uses dot-notation (no brackets)
  * @param {BufferEncoding} [encoding='utf-8'] - (Optional)
- * @returns {*}
+ * @returns {unknown}
  */
 export function get(key, encoding = 'utf8') {
 	const keypath = path.resolve(_cachedir, key.replace(/\./g, path.sep));
@@ -79,7 +79,7 @@ export function get(key, encoding = 'utf8') {
 			} catch (err) {
 				// [4]
 				if (err.code !== 'ENOENT') throw err;
-				return undefined;
+				return null;
 			}
 		} else {
 			throw err;

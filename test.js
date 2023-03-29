@@ -29,9 +29,9 @@ test('#get should return a value, if key exists', (t) => {
 	t.is(username, 'binyamin');
 });
 
-test('#get should return `undefined`, if key does not exist', (t) => {
+test('#get should return `null`, if key does not exist', (t) => {
 	const email = datacache.get('email');
-	t.is(email, undefined);
+	t.is(email, null);
 });
 
 test('#get should return an object/record, if key points to folder', (t) => {
