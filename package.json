@@ -14,7 +14,7 @@
 		"index.d.ts"
 	],
 	"devDependencies": {
-		"@types/node": "^18.15.11",
+		"@types/node": "^20.17.2",
 		"ava": "^5.2.0",
 		"mock-fs": "^5.2.0",
 		"typescript": "^5.0.2"
