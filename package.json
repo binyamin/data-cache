@@ -14,10 +14,10 @@
 		"index.d.ts"
 	],
 	"devDependencies": {
-		"@types/node": "^18.15.11",
+		"@types/node": "^18.19.123",
 		"ava": "^6.4.1",
-		"mock-fs": "^5.2.0",
-		"typescript": "^5.0.2"
+		"mock-fs": "^5.5.0",
+		"typescript": "^5.9.2"
 	},
 	"scripts": {
 		"test": "ava",
