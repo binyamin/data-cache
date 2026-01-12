@@ -23,6 +23,8 @@ datacache.get('data');
 // => "value"
 ```
 
-## License
+## Legal
 
-MIT © [Binyamin Green](https://binyam.in)
+All source-code is provided under the terms of [the MIT license](https://github.com/binyamin/data-cache/blob/main/LICENSE).
+
+Copyright 2020-2025 Binyamin Aron Green.
