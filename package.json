@@ -11,13 +11,13 @@
 		"index.d.ts"
 	],
 	"devDependencies": {
+		"@types/mock-fs": "^4.13.4",
 		"@types/node": "^24.10.7",
-		"ava": "^6.4.1",
 		"mock-fs": "^5.5.0",
 		"typescript": "^5.9.3"
 	},
 	"scripts": {
-		"test": "ava",
+		"test": "node test",
 		"types": "tsc index.js --allowJS --declaration --emitDeclarationOnly"
 	},
 	"repository": {
